@@ -4,6 +4,7 @@ import seaborn as sns
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
+from tabulate import tabulate
 
 mpl.rc('font', family='Malgun Gothic') #한글 폰트 지정
 plt.rcParams['axes.unicode_minus'] = False #마이너스 기호 깨짐 방지
@@ -22,7 +23,8 @@ df1 = pd.read_csv('crime_data.csv', encoding='cp949')
 
 #범죄대분류별로 그룹화
 df1_group_sum = df1.groupby('범죄대분류').sum() #'범죄대분류'의 카테고리 기준 합계
-# print(df1_group_sum)
+df1_group_sum = pd.DataFrame(df1_group_sum)
+print(tabulate(df1_group_sum, headers='keys', tablefmt='psql', showindex=True))
 # print(df1_group_sum['생활정도(계)']) #그 중에서도 '생활정도(계)'만 출력
 # print(df1_group_sum[['생활정도(계)', '생활정도(하류)']]) #그 중에서도 '생활정도(계), '활정도(하류)' 출력
 
